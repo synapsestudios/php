@@ -72,7 +72,7 @@ template "#{node['php']['conf_dir']}/php.ini" do
   variables(:directives => node['php']['directives'])
 end
 
-if platform?('debian')
+if platform?('debian', 'ubuntu')
   template "/etc/php5/apache2/php.ini" do
     source 'php.ini.erb'
     unless platform?('windows')
