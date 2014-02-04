@@ -71,3 +71,15 @@ template "#{node['php']['conf_dir']}/php.ini" do
   end
   variables(:directives => node['php']['directives'])
 end
+
+if platform?('debian') do
+  template "/etc/php5/apache2/php.ini" do
+    source 'php.ini.erb'
+    unless platform?('windows')
+      owner 'root'
+      group 'root'
+      mode '0644'
+    end
+    variables(:directives => node['php']['directives'])
+  end
+end
